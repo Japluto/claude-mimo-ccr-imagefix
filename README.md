@@ -2,11 +2,15 @@
 
 > **适用范围：** 本方案适用于已开通 **MiMo Token-Plan** 的用户。支持 **macOS / Ubuntu / Windows** 三平台。
 
+---
+
 ## 项目简介
 
 当 Claude Code 接入小米 MiMo Token-Plan 的 `mimo-v2.5-pro` 模型时，由于该模型不支持图片输入（非 MLLM），用户粘贴或发送图片会直接报错。
 
 本项目通过 [Claude Code Router (CCR)](https://github.com/musistudio/claude-code-router) 作为本地代理层进行智能路由，并配合 `mimo-image-recognition` MCP Server 实现图片识别，从根本上解决此问题。
+
+---
 
 ## 快速安装
 
@@ -76,6 +80,11 @@ MiMo Token-Plan 提供了多个模型，其中：
            │ 图片识别服务  │  (实际 MLLM 能力)
            └──────────────┘
 ```
+CCR Web UI 可视化配置（通过 `ccr ui` 打开）：
+
+![CCR Web UI 配置界面](image.png)
+
+---
 
 ## 配置步骤
 
@@ -347,6 +356,8 @@ unset _mimo_api_key
 
 这样 MCP 图片识别工具会被自动授权，无需每次手动确认。
 
+---
+
 ## Web UI 配置方式
 
 CCR 提供了可视化 Web 界面：
@@ -363,6 +374,8 @@ ccr ui
 3. **编辑 Router 规则**（拖拽式配置各类型请求的路由目标）
 4. **查看请求日志**（实时查看 API 转发情况，需先开启 LOG）
 5. **管理 Presets**（导出/导入配置方案）
+
+---
 
 ## 日常管理命令
 
@@ -386,6 +399,7 @@ ccr model
 # 直接通过 CCR 启动 Claude
 ccr code "你的提示词"
 ```
+---
 
 ## 自定义路由（可选）
 
@@ -404,6 +418,7 @@ module.exports = async function router(req) {
   return null; // 使用 config.json 中的默认路由
 };
 ```
+---
 
 ## 验证配置
 
@@ -420,6 +435,7 @@ echo $ANTHROPIC_BASE_URL
 claude
 # 在对话中粘贴一张图片，应该能正常识别
 ```
+---
 
 ## 文件清单
 
@@ -437,6 +453,8 @@ claude
 | `~/.bashrc` | Shell 启动配置（CCR 自动激活） | Ubuntu / Git Bash |
 | `$PROFILE` | PowerShell 启动配置（CCR 自动激活） | Windows |
 | `~/.claude/CLAUDE.md` | Claude Code 行为指令（MCP 工具优先级） | 全平台 |
+
+---
 
 ## 排错
 
